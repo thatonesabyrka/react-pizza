@@ -2,11 +2,21 @@ import { Header } from './components/Header'
 import { Categories } from './components/Categories'
 import { Sort } from './components/Sort'
 import { PizzaBlock } from './components/PizzaBlock'
-
 import pizzaImage from './assets/img/pizza.png'
 
+interface Pizza {
+  id: number
+  imageUrl: string
+  title: string
+  types: number[]
+  sizes: number[]
+  price: number
+  category: number
+  rating: number
+}
+
 export const App = () => {
-  const pizzas = [
+  const pizzas: Pizza[] = [
     {
       id: 0,
       imageUrl: pizzaImage,
