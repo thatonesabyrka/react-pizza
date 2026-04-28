@@ -1,24 +1,53 @@
-import pizzaImage from '../assets/img/pizza.png'
+import clsx from 'clsx'
+import { useState } from 'react'
 
 interface PizzaBlockProps {
+  id: number
+  imageUrl: string
   title: string
+  types: number[]
+  sizes: number[]
   price: number
 }
 
-export const PizzaBlock = ({ title, price }: PizzaBlockProps) => {
+export const PizzaBlock = ({
+  imageUrl,
+  title,
+  types,
+  sizes,
+  price,
+}: PizzaBlockProps) => {
+  const [activeType, setActiveType] = useState(types[0])
+  const [activeSize, setActiveSize] = useState(sizes[0])
+
+  const typesNames = ['тонкое', 'традиционное']
+
   return (
     <div className="pizza-block">
-      <img className="pizza-block__image" src={pizzaImage} alt="Pizza" />
+      <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
       <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          <li className="active">тонкое</li>
-          <li>традиционное</li>
+          {types.map((typeId) => (
+            <li
+              key={typeId}
+              className={clsx({ active: activeType === typeId })}
+              onClick={() => setActiveType(typeId)}
+            >
+              {typesNames[typeId]}
+            </li>
+          ))}
         </ul>
         <ul>
-          <li className="active">26 см.</li>
-          <li>30 см.</li>
-          <li>40 см.</li>
+          {sizes.map((size) => (
+            <li
+              key={size}
+              className={clsx({ active: activeSize === size })}
+              onClick={() => setActiveSize(size)}
+            >
+              {size} см.
+            </li>
+          ))}
         </ul>
       </div>
       <div className="pizza-block__bottom">
