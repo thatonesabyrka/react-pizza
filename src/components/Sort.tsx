@@ -1,7 +1,36 @@
+import clsx from 'clsx'
+import { useEffect, useRef, useState } from 'react'
+
 export const Sort = () => {
+  const options = ['популярности', 'цене', 'алфавиту'] as const
+  type SortType = (typeof options)[number]
+
+  const [open, setOpen] = useState(false)
+  const [activeSort, setActiveSort] = useState<SortType>('популярности')
+  const sortRef = useRef<HTMLDivElement>(null)
+
+  const handleSelect = (option: SortType) => {
+    setActiveSort(option)
+    setOpen(false)
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sortRef.current && !sortRef.current.contains(event.target as Node)) {
+        setOpen(false)
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
+
   return (
-    <div className="sort">
-      <div className="sort__label">
+    <div className="sort" ref={sortRef}>
+      <div className="sort__label" onClick={() => setOpen(!open)}>
         <svg
           width="10"
           height="6"
@@ -15,15 +44,23 @@ export const Sort = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span>популярности</span>
+        <span>{activeSort}</span>
       </div>
-      <div className="sort__popup">
-        <ul>
-          <li className="active">популярности</li>
-          <li>цене</li>
-          <li>алфавиту</li>
-        </ul>
-      </div>
+      {open && (
+        <div className="sort__popup">
+          <ul>
+            {options.map((option) => (
+              <li
+                key={option}
+                className={clsx(activeSort === option && 'active')}
+                onClick={() => handleSelect(option)}
+              >
+                {option}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   )
 }
