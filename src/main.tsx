@@ -3,9 +3,9 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import './styles/main.scss'
 import { App } from './App'
-import { Home } from './pages/HomePage'
-import { NotFound } from './pages/NotFoundPage'
-import { Cart } from './pages/CartPage'
+import { HomePage } from './pages/HomePage'
+import { NotFoundPage } from './pages/NotFoundPage'
+import { CartPage } from './pages/CartPage'
 
 const root = document.getElementById('root')
 
@@ -14,9 +14,9 @@ createRoot(root!).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route index element={<Home />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="*" element={<NotFound />} />
+          <Route index element={<HomePage />} />
+          <Route path="cart" element={<CartPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
