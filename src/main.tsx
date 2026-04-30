@@ -3,9 +3,9 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import './styles/main.scss'
 import { App } from './App'
-import { Home } from './pages/Home'
-import { NotFound } from './pages/NotFound'
-import { Cart } from './pages/Cart'
+import { Home } from './pages/HomePage'
+import { NotFound } from './pages/NotFoundPage'
+import { Cart } from './pages/CartPage'
 
 const root = document.getElementById('root')
 

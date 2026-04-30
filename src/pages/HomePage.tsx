@@ -15,7 +15,7 @@ interface Pizza {
   rating: number
 }
 
-export const Home = () => {
+export const HomePage = () => {
   const [pizzas, setPizzas] = useState<Pizza[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
