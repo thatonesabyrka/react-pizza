@@ -1,9 +1,9 @@
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 import { Header } from './components/Header'
 import { Categories } from './components/Categories'
 import { Sort } from './components/Sort'
-import { PizzaBlock } from './components/PizzaBlock'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { PizzaBlock, Skeleton } from './components/PizzaBlock'
 
 interface Pizza {
   id: number
@@ -48,11 +48,9 @@ export const App = () => {
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-            {isLoading ? (
-              <p>Загрузка...</p>
-            ) : (
-              pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)
-            )}
+            {isLoading
+              ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
+              : pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)}
           </div>
         </div>
       </div>
