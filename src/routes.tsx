@@ -1,0 +1,26 @@
+import { createBrowserRouter } from 'react-router'
+import { App } from './App'
+import { HomePage } from './pages/HomePage'
+import { CartPage } from './pages/CartPage'
+import { NotFoundPage } from './pages/NotFoundPage'
+
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: 'cart',
+        element: <CartPage />,
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />,
+      },
+    ],
+  },
+])
